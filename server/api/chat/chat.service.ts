@@ -1,31 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import * as Pusher from 'pusher';
-import { InjectModel } from '@nestjs/mongoose';
-import { Chat, ChatSchema } from './schemas/chat.schema';
-import { Model } from 'mongoose';
-import { Appointment } from '../appointment/schemas/appointment.entity';
-import { User } from '../users/models/user.model';
-import { Company } from '../companies/company.models';
+import { Injectable } from "@nestjs/common";
+import * as Pusher from "pusher";
+import { InjectModel } from "@nestjs/mongoose";
+import { Chat, ChatSchema } from "./schemas/chat.schema";
+import { Model } from "mongoose";
+import { Appointment } from "../appointment/schemas/appointment.entity";
+import { User } from "../users/models/user.model";
+import { Company } from "../companies/company.models";
 @Injectable()
 export class ChatService {
   pusher: Pusher;
   constructor(
-    
     @InjectModel(Chat.name) private chatModel: Model<Chat>,
     @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>,
     @InjectModel(User.name) private UsersModel: Model<User>,
-    @InjectModel(Company.name) private CompanyModule: Model<Company>,
-    
+    @InjectModel(Company.name) private CompanyModule: Model<Company>
   ) {
     this.pusher = new Pusher({
       appId: "1597736",
       key: "adc5cfb9b6ca20c0b7a8",
       secret: "34363521ce1a3e6d417c",
       cluster: "mt1",
-      useTLS: true
+      useTLS: true,
     });
   }
-  
+
   // fetchProByClient
 
   async findProByClient(from: string) {
@@ -38,7 +36,7 @@ export class ChatService {
     const pros = await this.appointmentModel
       .find({
         from: from,
-        status: 'Accepted',
+        status: "Accepted",
       })
       .exec();
     pros.forEach((prs) => {
@@ -76,7 +74,9 @@ export class ChatService {
   }
 
   async findAllChat(from: string) {
-    const chats = await this.chatModel.find({ $or: [{ from: from }, { to: from }] }).exec();
+    const chats = await this.chatModel
+      .find({ $or: [{ from: from }, { to: from }] })
+      .exec();
     return chats;
   }
 
@@ -96,7 +96,7 @@ export class ChatService {
       const res = await this.chatModel
         .findOneAndUpdate(
           { from: from, to: to },
-          { $push: { messages: newMessage } },
+          { $push: { messages: newMessage } }
         )
         .exec();
       return res;
@@ -110,9 +110,8 @@ export class ChatService {
       return res;
     }
   }
-  
+
   async trigger(channel: string, event: string, data: any) {
     await this.pusher.trigger(channel, event, data);
   }
-  
 }

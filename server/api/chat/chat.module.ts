@@ -14,7 +14,6 @@ import { Company, CompanySchema } from "../companies/company.models";
   
   imports: [MongooseModule.forFeature([
     { name: Chat.name, schema: ChatSchema }
-  ]),
   MongooseModule.forFeature([
     { name: Appointment.name, schema: AppointmentSchema }
   ]),

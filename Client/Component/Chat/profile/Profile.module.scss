@@ -1,0 +1,58 @@
+.profileCard{
+    border-radius: 15px;
+    background-color: #F2F7FF;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.profileHeaderCard{
+    
+    justify-content: start;
+    gap: 25px;
+    align-items: center;
+}
+.logoImg{
+    border-radius: 50px;
+     margin-left: 15px;
+}
+.text{
+    // margin-left: 25%;
+    color: #303E65;
+    width: 100%;
+}
+.switcher{
+    margin-left: 35px;
+    margin-top: 10px;
+    height: 30px;
+    display:flex;
+    width:60%;
+    justify-content: space-around;
+    background-color:white;
+    border-radius: 25px;
+    border: 1px solid #F8F1F1;
+    box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
+}
+// Message Component
+.miniChat{
+    margin: 10px 0;
+    border-radius: 15px;
+    display: flex;
+    // justify-content: space-between;
+    width: 100%;
+}
+.MsgCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    margin-left: 15px;
+}
+.msgTime{
+    float: right;
+    color: #bac8d4;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 3px;
+    
+}
